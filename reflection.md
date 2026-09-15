@@ -29,7 +29,7 @@ Document at least 3 bugs you found. Add rows as needed.
 - Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
 
 * I used Claude Code on this project 
-* One suggestion that the AI gave that was correct was regarding the logic for the hint functions. The messages were saying if guess was too high, to go higher and if guess was too low, to go lower. In addition, there was an issue with an except type error in the check_guess function. The guess was being cast to a string when it just needed to stay as an integer. The try/except block wasn't needad altogether.
+* One suggestion that the AI gave regarding Bug #1 that was correct was regarding the logic for the hint functions. The messages were saying if guess was too high, to go higher and if guess was too low, to go lower. In addition, there was an issue with an except type error in the check_guess function. The guess was being cast to a string when it just needed to stay as an integer. The try/except block wasn't needad altogether.
 * I wouldn't say that any of the suggestions were incorrect, I just needed to ask for more clarification to understand the type Error and the try/except block issue
 
 ---
@@ -41,7 +41,16 @@ Document at least 3 bugs you found. Add rows as needed.
   and what it showed you about your code.
 - Did AI help you design or understand any tests? How?
 
-* I decided the bug was really fixed by first prompting claude to confirm and run test cases in the terminal, and then by re-running the application live, which
+BUG 1: 
+* I decided the bug was really fixed by first prompting claude to confirm and run test cases in the terminal, and then by re-running the application live, which then adjusted accordingly and performed the expected correct output. In this case in particular, the hints for guesses to go higher and lower now worked correctly. I then added test cases to test/tes_game_logic.py and ran pytest in the terminal and all of the test cases passed successfully
+* One test I ran manually on the actual website was doing a live demo focusing on the check_guess and hints features. 
+    - Guess 1: 50 --> hint is go Higher
+    - Guess 2 : 60 --> hint is go Lower
+    - Guess 3: 55 --> hint is go Higher
+    - Guess 4: 57 --> hint is go Higher
+    - Guess 5: 59 --> hint is go Lower
+    - Guess 6: 58 --> correct guess!!
+* 
 
 ---
 
@@ -51,7 +60,7 @@ Document at least 3 bugs you found. Add rows as needed.
 
 By default, Streamlit acts like a clean slate on every interaction, and session state is the memory that prevents it from forgetting everything
 
-The "Blank Slate": On every rerun, ordinary Python variables are completely wiped and re-initialized. If you have x = 0 at the top of your script and a button that does x += 1, clicking that button triggers a rerun. The script starts from the top, sets x = 0 again, and your change is lost
+On every rerun, ordinary Python variables are completely wiped and re-initialized. If you have x = 0 at the top of your script and a button that does x += 1, clicking that button triggers a rerun. The script starts from the top, sets x = 0 again, and your change is lost
 
 Because reruns wipe ordinary variables, you need a way to remember data across those runs. Session State (st.session_state) is a dictionary-like object that persists data between reruns for a specific user session. A "session" is unique to each open browser tab. If User A and User B open your app, they each get their own isolated independent sandbox memory.
 ---
@@ -64,6 +73,6 @@ Because reruns wipe ordinary variables, you need a way to remember data across t
 - In one or two sentences, describe how this project changed the way you think about AI generated code.
 
 
-* Attaching files directly for context in the chat is a habit/strategy that I will use for foture labs and projects 
+* Attaching files directly for context in the chat is a habit/strategy that I will use for future labs and projects 
 
 * One thing that I will do differently is ask for explanation when I ask about bugs in the code. I think that it's one thing to find out what/where the bug is, but also why the bug is an issue and what specifically about the logic and how it contributes to the functionality of the project as a whole. 
