@@ -12,9 +12,9 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 
 Document at least 3 bugs you found. Add rows as needed.
 
-1. The hints telling me to go lower/higher were incorrect. I guessed 3 and was told to go lower, while the number was revealed to apparently be 36
-2. Starting a new game button didn't work
-3. "pressing enter to apply" didn't work, I had to actually press the submit guess button
+1. The hints telling me to go lower/higher were incorrect. I guessed 3 and was told to go lower, while the number was revealed to apparently be 36. I expected the hints to guide me in the opposite direction. There was no console output or error output
+2. Starting a new game button didn't work. I expected a new state/session to begin for the game but nothing visibly changed on the screen. There was no console output or error output. 
+3. "pressing enter to apply" didn't work, I had to actually press the submit guess button. There was no console output or error output.
 
 | Input | Expected Behavior | Actual Behavior | Console Output / Error |
 |-------|-------------------|-----------------|------------------------|
@@ -30,7 +30,7 @@ Document at least 3 bugs you found. Add rows as needed.
 
 * I used Claude Code on this project 
 * One suggestion that the AI gave regarding Bug #1 that was correct was regarding the logic for the hint functions. The messages were saying if guess was too high, to go higher and if guess was too low, to go lower. In addition, there was an issue with an except type error in the check_guess function. The guess was being cast to a string when it just needed to stay as an integer. The try/except block wasn't needad altogether.
-* I wouldn't say that any of the suggestions were incorrect, I just needed to ask for more clarification to understand the type Error and the try/except block issue
+* I wouldn't say that any of the suggestions were incorrect, I just needed to ask for more clarification to understand the type Error and the try/except block issue. Or if a fix was implement, such as the case for bug #2, it was only a partial fix for the overall functionality of the bug. 
 
 ---
 
@@ -51,6 +51,7 @@ BUG 1:
     - Guess 5: 59 --> hint is go Lower
     - Guess 6: 58 --> correct guess!!
     - Success!!
+  * AI helped me design pytest test cases for this bug in tests/test_game_logic.py. These test cases were pretty straightforward and simple, so I understood them.
 
 
 BUG 2: 
@@ -64,7 +65,9 @@ BUG 2:
 - Press New Game Button : text box refreshes and cleared previous output
 - Success!!
 
-* After I implemented another round of edits, the new game button does work as expected now and the text box refreshes. I checked the developer debug info again to confirm that a new game was started.
+* After I implemented another round of edits, I ran a manual test by restarting the streamlit state and running the app again. The new game button does work as expected now and the text box refreshes. I checked the developer debug info again to confirm that a new game was started.
+
+* I didn't ask AI to run or create any test cases for the new game feature. I figured it would be easier to just do it manually.
 ---
 
 ## 4. What did you learn about Streamlit and state?
@@ -87,7 +90,9 @@ Because reruns wipe ordinary variables, you need a way to remember data across t
 
 
 * Attaching files directly for context in the chat is a habit/strategy that I will use for future labs and projects 
-
 * One thing that I will do differently is ask for explanation when I ask about bugs in the code. I think that it's one thing to find out what/where the bug is, but also why the bug is an issue and what specifically about the logic and how it contributes to the functionality of the project as a whole. 
-
 * One thing I will also do is to ask for specific line numbers of where claude is suggestion to add/remove code. This way I can double check and perform comparisons myself as well. This forces claude to show me the before and after version of my code. 
+
+* The next time I work with AI on a coding task, I'll make sure to be more specific and intentional about asking it to make edits and finding where those edits were made, why, etc. so that I can do a better job of comparing the before/after code and understanding the code improvisions for the edits. I'll also be paying more attention to the token usage and the time taken to answer a question. If the AI is taking too long to respond or cycling around, it's my sign to rephrase or retry my prompt and provide more context/clarity.
+
+* This project has changed the way I think about AI generated code in terms of complexity. A few times after edits/suggestions were made, there was additional code changed or suggested to be changed that I didn't think were necessary. Or conversely, there was code changed that didn't address the whole impact of the bug and I had to reinvestigate or re evaluate. 
