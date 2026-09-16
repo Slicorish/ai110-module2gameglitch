@@ -48,6 +48,9 @@ if "status" not in st.session_state:
 if "history" not in st.session_state:
     st.session_state.history = []
 
+if "game_id" not in st.session_state: #ADDED part 2: initialize a game_id in the session state to track new game sessions for multiple games played in the same session. This is important for ensuring that the input field is reset properly when starting a new game.
+    st.session_state.game_id = 0
+
 st.subheader("Make a guess")
 
 st.info(
@@ -64,7 +67,7 @@ with st.expander("Developer Debug Info"):
 
 raw_guess = st.text_input(
     "Enter your guess:",
-    key=f"guess_input_{difficulty}"
+    key=f"guess_input_{difficulty}_{st.session_state.game_id}" # ADDED part 2: include the game_id in the key to ensure that the input field is reset when starting a new game, preventing the previous guess from persisting across games. This was previously only relying on the difficulty level, which could lead to issues if the user played multiple games at the same difficulty without changing it.
 )
 
 col1, col2, col3 = st.columns(3)
@@ -75,10 +78,13 @@ with col2:
 with col3:
     show_hint = st.checkbox("Show hint", value=True)
 
+#FIXME for bug #2: This should reset the game state, but it doesn't create a new game session at all. The secret number remains the same, and the attempts and score are not reset.
 if new_game:
-    st.session_state.attempts = 0
+    st.session_state.attempts = 0 #ADDED: reset the session state counter for attempts
     st.session_state.secret = random.randint(1, 100)
-    st.success("New game started.")
+    st.session_state.status = "playing"  # ADDED: reset the game status to playing
+    st.session_state.history = [] # ADDED: reset the history of guesses
+    st.session_state.game_id += 1 #ADDED part 2: increment the game_id to ensure a new session is created
     st.rerun()
 
 if st.session_state.status != "playing":

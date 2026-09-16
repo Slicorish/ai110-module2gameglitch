@@ -50,8 +50,21 @@ BUG 1:
     - Guess 4: 57 --> hint is go Higher
     - Guess 5: 59 --> hint is go Lower
     - Guess 6: 58 --> correct guess!!
-* 
+    - Success!!
 
+
+BUG 2: 
+* I decided the bug was at first not completely fixed after the first round of edits that claude had suggested and I implemented. I re-ran the application live to verify this. I had to use the develper debug info to verify that a new game was indeed started, but the field for you to guess a new number does not clear so the last guess is still there.
+
+* The test I ran manually after making the second level of improvements was: 
+- Guess 1: 50 --> hint is go Higher
+- Guess 2: 90 --> hint is go Lower
+- Guess 3: 80 --> hint is go Lower
+- Guess 4: 70 --> correct game won
+- Press New Game Button : text box refreshes and cleared previous output
+- Success!!
+
+* After I implemented another round of edits, the new game button does work as expected now and the text box refreshes. I checked the developer debug info again to confirm that a new game was started.
 ---
 
 ## 4. What did you learn about Streamlit and state?
@@ -76,3 +89,5 @@ Because reruns wipe ordinary variables, you need a way to remember data across t
 * Attaching files directly for context in the chat is a habit/strategy that I will use for future labs and projects 
 
 * One thing that I will do differently is ask for explanation when I ask about bugs in the code. I think that it's one thing to find out what/where the bug is, but also why the bug is an issue and what specifically about the logic and how it contributes to the functionality of the project as a whole. 
+
+* One thing I will also do is to ask for specific line numbers of where claude is suggestion to add/remove code. This way I can double check and perform comparisons myself as well. This forces claude to show me the before and after version of my code. 
